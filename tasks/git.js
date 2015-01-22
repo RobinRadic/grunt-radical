@@ -26,7 +26,7 @@ module.exports = function (grunt) {
             if(result.code === 1){
                 grunt.verbose.error('Error: ' + result.stdout);
                 grunt.log.error('An error occured');
-                grunt.fail();
+                grunt.fail.fatal();
             }
             if(options.output === true){
                 grunt.log.writeln(result.stdout);
