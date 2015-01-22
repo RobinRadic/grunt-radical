@@ -79,7 +79,7 @@ module.exports = function (grunt) {
             ok('Pushed tag v' + version.toString());
         }
         if(config.git.pushMaster === true) {
-            git('push', {u: 'origin master'});
+            git('push', {u: 'origin'}, 'master');
             ok('Pushed master branch');
         }
 
