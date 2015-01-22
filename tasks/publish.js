@@ -68,6 +68,8 @@ module.exports = function (grunt) {
         git('push', { u: 'origin v' + version.toString() });
         git('push', { u: 'origin master' });
 
+        npm('publish');
+
         taskDone();
     });
 
