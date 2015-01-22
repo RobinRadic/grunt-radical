@@ -29,7 +29,6 @@ module.exports = function (grunt) {
                 grunt.fail();
             }
             if(options.output === true){
-                grunt.log.writeln('code: ' + result.code);
                 grunt.log.writeln(result.stdout);
             }
         });
