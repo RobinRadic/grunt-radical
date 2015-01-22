@@ -23,11 +23,15 @@ module.exports = function (grunt) {
         var git = radic.binwraps.create('git');
         commands.forEach(function(command){
             var result = git.apply(git, command);
+            if(result.code === 1){
+                grunt.verbose.error('Error: ' + result.stdout);
+                grunt.log.error('An error occured');
+                grunt.fail();
+            }
             if(options.output === true){
                 grunt.log.writeln('code: ' + result.code);
                 grunt.log.writeln(result.stdout);
             }
-            //ok('Git command executed: ' + command[0]);
         });
 
         ok('Git commands executed');
