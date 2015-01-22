@@ -57,11 +57,12 @@ module.exports = function (grunt) {
 
         git('add', { A: true });
         git('commit', { m: 'pre-publish commit' });
-        //git('')
-        if(npm('version', action).code === 1){
+
+        var npmResult = npm('version', action);
+        if(npmResult.code === 1){
             ok('npm version increased');
         } else {
-            grunt.log.error('An error occured');
+            grunt.log.error('An error occured: ' + npmResult.stdout);
         }
 
         git('push', { u: 'origin v' + version.toString() });
