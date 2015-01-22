@@ -23,12 +23,6 @@ module.exports = function(grunt) {
             }
         },
         git: {
-            test: {
-                commands: [
-                    ['add', { A: true }],
-                    ['commit', { m: 'test commit' }]
-                ]
-            },
             docs: {
                 options: {
                     cwd: 'docs',
@@ -44,5 +38,5 @@ module.exports = function(grunt) {
     });
 
 
-    grunt.registerTask('jsdoc', ['radic_jsdoc', 'radic_jsdoc_mdpages', 'git:docs']);
+    grunt.registerTask('docs', ['radic_jsdoc:docs', 'radic_jsdoc_mdpages:docs', 'git:docs']);
 };
