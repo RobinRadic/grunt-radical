@@ -24,17 +24,25 @@ module.exports = function(grunt) {
         },
         git: {
             test: {
-                options: {
-                    output: true
-                },
                 commands: [
                     ['add', { A: true }],
                     ['commit', { m: 'test commit' }]
+                ]
+            },
+            docs: {
+                options: {
+                    cwd: 'docs',
+                    ignoreErrors: true
+                },
+                commands: [
+                    ['add', { A: true }],
+                    ['commit', { m: 'Auto commit & push' }],
+                    ['push', { u: 'origin' }, 'ghpages']
                 ]
             }
         }
     });
 
 
-    grunt.registerTask('jsdoc', ['radic_jsdoc', 'radic_jsdoc_mdpages']);
+    grunt.registerTask('jsdoc', ['radic_jsdoc', 'radic_jsdoc_mdpages', 'git:docs']);
 };

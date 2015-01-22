@@ -12,20 +12,25 @@ var lib = require('../lib'),
 module.exports = function (grunt) {
     grunt.registerMultiTask('git', 'Git commands.', function () {
         var self = this;
-        //var taskDone = this.async();
+        var taskDone = this.async();
         var cwd = process.cwd();
         var ok = grunt.log.ok;
         var options = this.options({
-            output: true
+            output: true,
+            cwd: false,
+            ignoreErrors: false
         });
         var commands = this.data.commands;
-
         var git = radic.binwraps.create('git');
+
+        if(options.cwd !== false){
+            process.chdir(options.cwd);
+        }
+
         commands.forEach(function(command){
             var result = git.apply(git, command);
-            if(result.code === 1){
+            if(result.code === 1 && options.ignoreErrors === false){
                 grunt.verbose.error('Error: ' + result.stdout);
-                grunt.log.error('An error occured');
                 grunt.fail.fatal('Executing the git command resulted in an error');
             }
             if(options.output === true){
@@ -33,10 +38,9 @@ module.exports = function (grunt) {
             }
         });
 
+        process.chdir(cwd);
         ok('Git commands executed');
-
-        // Done
-        //taskDone();
+        taskDone();
     });
 
 };

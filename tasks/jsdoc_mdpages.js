@@ -37,8 +37,6 @@ module.exports = function (grunt) {
 
         });
 
-        ok('radic_jsdoc_mdpages done');
-
         // Done
         taskDone();
     });
