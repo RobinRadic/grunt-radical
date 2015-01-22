@@ -58,7 +58,7 @@ module.exports = function (grunt) {
         // Add and commit all changes
         git('add', { A: true });
         git('commit', { m: 'pre-publish commit' });
-        ok('Added and commited all changes pre-publish');
+        ok('Added and commited all changes pre-version increase');
 
         // Increase package.json version
         var npmResult = npm('version', action);
@@ -71,7 +71,7 @@ module.exports = function (grunt) {
         // Add and commit all changes
         git('add', { A: true });
         git('commit', { m: 'pre-publish commit' });
-        ok('Added and commited all changes post-publish');
+        ok('Added and commited all changes post-version increase');
 
         // Push it
         if(config.git.pushTag === true) {
