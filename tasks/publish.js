@@ -74,11 +74,11 @@ module.exports = function (grunt) {
         ok('Added and commited all changes post-publish');
 
         // Push it
-        if(options.git.pushTag === true) {
+        if(config.git.pushTag === true) {
             git('push', {u: 'origin v' + version.toString()});
             ok('Pushed tag v' + version.toString());
         }
-        if(options.git.pushMaster === true) {
+        if(config.git.pushMaster === true) {
             git('push', {u: 'origin master'});
             ok('Pushed master branch');
         }
