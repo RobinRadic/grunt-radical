@@ -16,6 +16,9 @@ module.exports = function(grunt) {
                     src: '*.md',
                     dest: 'docs',
                     expand: true
+                },{
+                    src: 'README.md',
+                    dest: 'docs/index.md'
                 }]
             }
         }
