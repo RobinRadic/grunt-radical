@@ -58,6 +58,7 @@ module.exports = function (grunt) {
         // Add and commit all changes
         git('add', { A: true });
         git('commit', { m: 'pre-publish commit' });
+        ok('Added and commited all changes pre-publish');
 
         // Increase package.json version
         var npmResult = npm('version', action);

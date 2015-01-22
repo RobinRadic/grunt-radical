@@ -21,6 +21,17 @@ module.exports = function(grunt) {
                     dest: 'docs/index.md'
                 }]
             }
+        },
+        git: {
+            test: {
+                options: {
+                    output: true
+                },
+                commands: [
+                    ['add', { A: true }],
+                    ['commit', { m: 'test commit' }]
+                ]
+            }
         }
     });
 
