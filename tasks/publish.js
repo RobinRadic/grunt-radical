@@ -71,13 +71,20 @@ module.exports = function (grunt) {
         // Add and commit all changes
         git('add', { A: true });
         git('commit', { m: 'pre-publish commit' });
+        ok('Added and commited all changes post-publish');
 
         // Push it
-        git('push', { u: 'origin v' + version.toString() });
-        git('push', { u: 'origin master' });
-
+        if(options.git.pushTag === true) {
+            git('push', {u: 'origin v' + version.toString()});
+            ok('Pushed tag v' + version.toString());
+        }
+        if(options.git.pushMaster === true) {
+            git('push', {u: 'origin master'});
+            ok('Pushed master branch');
+        }
 
         npm('publish');
+        ok('Published npm package');
 
         taskDone();
     });
