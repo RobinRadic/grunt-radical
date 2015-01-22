@@ -1,0 +1,72 @@
+---
+layout: page
+title: Grunt Radical
+minify_content: false
+navigation:
+  - name: Home
+    link: /
+    icon: fa fa-home
+  - name: Overview
+    link: /grunt-radical
+    icon: fa fa-dashboard
+  - name: Coverage
+    link: /grunt-radical/coverage
+    icon: fa fa-code
+  - name: Namespaces
+    link: "#"
+    icon: fa fa-mortar-board
+    children:
+      - name: lib
+        link: /grunt-radical/lib.html
+
+---
+
+<link type="text/css" rel="stylesheet" href="styles/jsdoc-radic.css">
+
+
+<ul class="nav nav-tabs hide">
+    <li><a href="index.html">Overview</a></li><li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Namespaces<i class="fa fa-angle-down"></i></a><ul class="dropdown-menu" role="menu"><li><a href="lib.html">lib</a></li></ul></li>
+</ul>
+
+<div id="main">
+    
+
+
+
+    
+            {% highlight javascript %}
+            var radic = require('radic'),
+    inquirer = require('inquirer'),
+    util = radic.util,
+    path = require('path'),
+    _ = require('lodash'),
+    fs = require('fs-utils'),
+    yaml = require('js-yaml');
+
+/**
+ * @namespace lib
+ * @type {{RadicReport: (RadicReport|exports), getFrontMatterYaml: Function, replaceHighlightToGithubPages: Function, prompt: (exports.prompt|*)}}
+ */
+var lib = module.exports = {
+    RadicReport: require('./istanbul-radic-report'),
+
+    getFrontMatterYaml: function(filePath){
+        return yaml.safeLoad(fs.readFileSync(filePath, 'utf-8').replace(/---/g, ''));
+    },
+
+    replaceHighlightToGithubPages: function(str){
+        return str
+            .replace(/```(?=\w)(\w*)/g, '{% highlight $1 %}')
+            .replace(/```\n/g, '{% endhighlight %}\n');
+    },
+
+    prompt: inquirer.prompt
+};
+
+            {% endhighlight %}
+
+
+
+
+
+</div>
