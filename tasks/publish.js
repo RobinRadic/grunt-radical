@@ -55,9 +55,11 @@ module.exports = function (grunt) {
             ok('Bower has been synced');
         }
 
+        // Add and commit all changes
         git('add', { A: true });
         git('commit', { m: 'pre-publish commit' });
 
+        // Increase package.json version
         var npmResult = npm('version', action);
         if(npmResult.code === 0){
             ok('npm version increased');
@@ -65,8 +67,14 @@ module.exports = function (grunt) {
             grunt.log.error('An error occured: ' + npmResult.stdout);
         }
 
+        // Add and commit all changes
+        git('add', { A: true });
+        git('commit', { m: 'pre-publish commit' });
+
+        // Push it
         git('push', { u: 'origin v' + version.toString() });
         git('push', { u: 'origin master' });
+
 
         npm('publish');
 
